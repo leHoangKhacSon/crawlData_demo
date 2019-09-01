@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Crawl Data</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body>
+	<ul id="data-list">
+		
+	</ul>
+
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script type="text/javascript">
+	let url = 'http://localhost:3000/data';
+	axios.get(url).then(function(res){
+		let datas = res.data;
+		render(datas);
+		console.log(res.data);
+	});
+
+	function render(datas){
+		let htmlList = document.getElementById('data-list');
+		let dataContent = datas.map(function(data){
+			return '<li>' + 'title: '+  data.title + '</li>'  
+					+ '<li>' + 'url: ' + '<a href="data.url">' + data.url + '</a>' + '</li>' + '</br>' ;
+		});
+		htmlList.innerHTML = dataContent.join('');
+	}
+</script>
+</body>
+</html>
